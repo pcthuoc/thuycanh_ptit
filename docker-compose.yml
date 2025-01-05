@@ -1,0 +1,72 @@
+version: '3'
+
+services:
+  base:
+    build:
+      context: .
+      dockerfile: ./base/Dockerfile
+    image: ninjaclasher/dmoj-base
+    network_mode: none
+
+  daphne:
+    build:
+      context: ./daphne
+      dockerfile: Dockerfile
+    container_name: daphne
+    restart: always
+    volumes:
+      - ./repo/:/site/
+    working_dir: /site/
+    networks:
+      - db_network
+      - web_network
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+  job_scheduler:
+    build:
+      context: ./job_scheduler
+      dockerfile: Dockerfile
+    container_name: job_scheduler
+    restart: always
+    volumes:
+      - ./repo/:/site/
+    working_dir: /site/
+    networks:
+      - db_network
+      - web_network
+    depends_on:
+      - redis
+    env_file: 
+      - environment/site.env
+
+  nginx:
+    container_name: nginx
+    image: nginx:1.15.0
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    depends_on:
+      - daphne
+      - job_scheduler
+    networks:
+      - db_network
+      - web_network
+  redis:
+    container_name: redis
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - db_network
+
+networks:
+  db_network:
+    driver: bridge
+  web_network:
+    driver: bridge
