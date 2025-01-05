@@ -36,8 +36,8 @@ def config_job(scheduler):
     """
     Cấu hình các công việc cho scheduler.
     """
-    #scheduler.add_job(check_hengio_tasks, 'interval', seconds=5, id='check_hengio_tasks', replace_existing=True)
-    #scheduler.add_job(check_and_control_system, 'interval', seconds=15, id='check_and_control_system', replace_existing=True)
+    scheduler.add_job(check_hengio_tasks, 'interval', seconds=5, id='check_hengio_tasks', replace_existing=True)
+    scheduler.add_job(check_and_control_system, 'interval', seconds=15, id='check_and_control_system', replace_existing=True)
     scheduler.add_job(control_pump_job, 'interval', seconds=5, id='control_pump_job', replace_existing=True)
     return scheduler
 
