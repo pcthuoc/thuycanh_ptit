@@ -1,0 +1,40 @@
+<!-- [ navigation menu ] start -->
+<nav class="pc-sidebar ">
+	<div class="navbar-wrapper">
+		<div class="m-header">
+			<a href="/" class="b-brand">
+				<!-- ========  change your logo here ============ -->
+				<img src="/static/assets/images/logo-ptit-1.svg" alt="" class="logo logo-lg" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+			</a>
+			
+		</div>
+		<div class="navbar-content">
+			<ul class="pc-navbar">
+
+				<li class="pc-item">
+					<a href="/" class="pc-link "><span class="pc-micon"><i
+								class="material-icons-two-tone">home</i></span><span
+							class="pc-mtext">Home</span></a>
+				</li>
+
+
+				<li class="pc-item {% if request.path == '/scene/' %}active{% endif %}">
+					<a href="/scene" class="pc-link">
+						<span class="pc-micon"><i class="material-icons-two-tone">settings</i></span>
+						<span class="pc-mtext">Quản lý tự động</span>
+					</a>
+				</li>
+				<li class="pc-item {% if request.path == '/chart/' %}active{% endif %}">
+					<a href="/chart" class="pc-link">
+						<span class="pc-micon"><i class="material-icons-two-tone">insert_chart</i></span>
+						<span class="pc-mtext">Dữ liệu biểu đồ</span>
+					</a>
+				</li>
+				
+
+			</ul>
+
+		</div>
+	</div>
+</nav>
+<!-- [ navigation menu ] end -->
