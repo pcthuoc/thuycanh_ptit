@@ -187,7 +187,7 @@ def control_device(api_key, pin, value):
     #     return False
 
     #url = f'http://{device_ip}:8000/update/{api_key}/{pin}/?value={value}'
-    url = f'http://103.252.136.73:8000/update/{api_key}/{pin}/?value={value}'
+    url = f'http://103.252.136.73/update/{api_key}/{pin}/?value={value}'
     print(url)
     response = requests.get(url)
     return response.status_code == 200
